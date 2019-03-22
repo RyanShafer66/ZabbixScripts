@@ -1,6 +1,7 @@
 # Variables
 $redisPath = "c:\Redis"
 $computer=$env:COMPUTERNAME
+$zabbixServer = "zabbix.domain.local"
 
 # Set the current location to the redis directory
 Set-Location -Path $redisPath
@@ -119,5 +120,5 @@ Foreach ($property in ($object | Get-Member -MemberType NoteProperty))
 {
    $prop = $property.Name
    $val = $object.$($property.Name)
-   CMD.EXE /C "C:\DevOps\zabbix\zabbix_sender.exe -z zabbix.tcetra.local -p 10051 -s $computer -k $prop -o $val" | Out-Null
+   CMD.EXE /C "C:\DevOps\zabbix\zabbix_sender.exe -z $zabbixServer -p 10051 -s $computer -k $prop -o $val" | Out-Null
 }
